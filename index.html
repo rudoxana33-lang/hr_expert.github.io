@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Кадровый и воинский учёт — эксперт</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --navy:#0C1428;
+    --navy2:#111E36;
+    --navy3:#172242;
+    --gold:#C8A84B;
+    --gold2:#E2C97E;
+    --text:#F0EBE0;
+    --muted:#8A93A8;
+    --soft:#C5CEDF;
+    --accent-bg:#1A2845;
+    --danger:#D94F4F;
+    --radius:14px;
+    --radius-sm:8px;
+  }
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--navy);
+    color:var(--text);
+    font-family:'Manrope',sans-serif;
+    font-size:15px;
+    line-height:1.65;
+    max-width:480px;
+    margin:0 auto;
+    min-height:100vh;
+  }
+  h1,h2,h3{font-family:'Playfair Display',serif;line-height:1.25;color:var(--text)}
+  h1{font-size:28px;font-weight:600}
+  h2{font-size:21px;font-weight:500}
+  h3{font-size:17px;font-weight:500}
+  p{color:var(--soft);font-size:14px;line-height:1.7}
+  .section{padding:36px 22px}
+  .section+.section{border-top:1px solid #1E2E4A}
+  .gold{color:var(--gold)}
+  .tag{
+    display:inline-block;
+    background:#1A2845;
+    border:1px solid var(--gold);
+    color:var(--gold);
+    font-size:11px;
+    font-weight:600;
+    letter-spacing:.8px;
+    text-transform:uppercase;
+    padding:4px 10px;
+    border-radius:4px;
+    margin-bottom:14px;
+  }
+  .btn{
+    display:block;
+    width:100%;
+    padding:16px;
+    border-radius:var(--radius);
+    font-family:'Manrope',sans-serif;
+    font-size:15px;
+    font-weight:600;
+    text-align:center;
+    text-decoration:none;
+    cursor:pointer;
+    border:none;
+    transition:opacity .15s;
+  }
+  .btn:active{opacity:.85}
+  .btn-primary{background:var(--gold);color:#0C1428}
+  .btn-outline{
+    background:transparent;
+    border:1px solid var(--gold);
+    color:var(--gold);
+  }
+  .btn-wa{
+    background:#1A5C38;
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+  }
+  .btn-wa svg{flex-shrink:0}
+  .cta-stack{display:flex;flex-direction:column;gap:10px;margin-top:22px}
+  .hero{
+    padding:48px 22px 36px;
+    text-align:center;
+    background:linear-gradient(180deg,#0E1A30 0%,var(--navy) 100%);
+    position:relative;
+    overflow:hidden;
+  }
+  .hero::before{
+    content:'';
+    position:absolute;
+    top:-60px;right:-60px;
+    width:220px;height:220px;
+    border-radius:50%;
+    background:rgba(200,168,75,.06);
+    pointer-events:none;
+  }
+  .hero::after{
+    content:'';
+    position:absolute;
+    bottom:-40px;left:-40px;
+    width:160px;height:160px;
+    border-radius:50%;
+    background:rgba(200,168,75,.04);
+    pointer-events:none;
+  }
+  .avatar{
+    width:82px;height:82px;
+    border-radius:50%;
+    border:2px solid var(--gold);
+    background:var(--navy3);
+    margin:0 auto 18px;
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Playfair Display',serif;
+    font-size:28px;font-weight:600;
+    color:var(--gold);
+  }
+  .hero h1{margin-bottom:14px}
+  .hero p{font-size:15px;color:var(--soft);margin-bottom:0}
+  .badge-row{
+    display:flex;justify-content:center;gap:8px;
+    flex-wrap:wrap;margin-top:16px;margin-bottom:24px;
+  }
+  .badge{
+    background:rgba(200,168,75,.12);
+    border:1px solid rgba(200,168,75,.3);
+    color:var(--gold2);
+    font-size:11px;font-weight:600;
+    padding:4px 10px;border-radius:20px;
+    letter-spacing:.5px;
+  }
+  .divider{width:40px;height:2px;background:var(--gold);margin:16px auto 22px}
+  .pain-item{
+    display:flex;gap:14px;align-items:flex-start;
+    background:var(--accent-bg);
+    border:1px solid #1E2E4A;
+    border-left:3px solid var(--danger);
+    border-radius:var(--radius-sm);
+    padding:14px;
+    margin-bottom:10px;
+  }
+  .pain-icon{
+    width:32px;height:32px;border-radius:50%;
+    background:rgba(217,79,79,.15);
+    display:flex;align-items:center;justify-content:center;
+    flex-shrink:0;font-size:15px;
+  }
+  .pain-item h3{font-family:'Manrope',sans-serif;font-size:13px;font-weight:600;color:var(--text);margin-bottom:3px}
+  .pain-item p{font-size:12px;margin:0;color:var(--muted)}
+  .solution-item{
+    display:flex;gap:14px;align-items:flex-start;
+    margin-bottom:16px;
+  }
+  .check{
+    width:26px;height:26px;border-radius:50%;
+    background:rgba(200,168,75,.15);
+    border:1px solid rgba(200,168,75,.4);
+    display:flex;align-items:center;justify-content:center;
+    flex-shrink:0;font-size:13px;color:var(--gold);font-weight:700;
+  }
+  .solution-item p{font-size:13px;color:var(--soft);margin:0;padding-top:3px}
+  .stats-grid{
+    display:grid;grid-template-columns:1fr 1fr;
+    gap:10px;margin-top:18px;
+  }
+  .stat-card{
+    background:var(--accent-bg);
+    border:1px solid #1E2E4A;
+    border-radius:var(--radius-sm);
+    padding:14px 12px;
+    text-align:center;
+  }
+  .stat-num{
+    font-family:'Playfair Display',serif;
+    font-size:28px;font-weight:600;
+    color:var(--gold);display:block;
+  }
+  .stat-label{font-size:11px;color:var(--muted);margin-top:4px;line-height:1.4;display:block}
+  .case-card{
+    background:var(--accent-bg);
+    border:1px solid #1E2E4A;
+    border-radius:var(--radius);
+    padding:18px;
+    margin-bottom:12px;
+  }
+  .case-header{
+    display:flex;align-items:center;gap:10px;margin-bottom:12px;
+  }
+  .case-icon{
+    width:36px;height:36px;border-radius:var(--radius-sm);
+    background:rgba(200,168,75,.12);
+    display:flex;align-items:center;justify-content:center;font-size:17px;
+  }
+  .case-title{font-family:'Manrope',sans-serif;font-size:13px;font-weight:600;color:var(--text)}
+  .case-sub{font-size:11px;color:var(--muted);margin-top:1px}
+  .case-result{
+    background:rgba(200,168,75,.07);
+    border-left:2px solid var(--gold);
+    padding:8px 12px;
+    border-radius:0 var(--radius-sm) var(--radius-sm) 0;
+    font-size:12px;color:var(--gold2);
+    margin-top:10px;
+  }
+  .case-card p{font-size:13px;color:var(--soft);margin:0}
+  .step{
+    display:flex;gap:14px;align-items:flex-start;
+    margin-bottom:16px;
+  }
+  .step-num{
+    width:30px;height:30px;border-radius:50%;
+    background:rgba(200,168,75,.15);
+    border:1px solid rgba(200,168,75,.5);
+    display:flex;align-items:center;justify-content:center;
+    font-size:12px;font-weight:700;color:var(--gold);
+    flex-shrink:0;
+  }
+  .step p{font-size:13px;color:var(--soft);margin:0;padding-top:5px}
+  .package-card{
+    background:var(--accent-bg);
+    border:1px solid #1E2E4A;
+    border-radius:var(--radius);
+    padding:18px;
+    margin-bottom:12px;
+    transition:border-color .2s;
+  }
+  .package-card.featured{
+    border-color:var(--gold);
+    position:relative;
+  }
+  .featured-badge{
+    position:absolute;top:-11px;left:50%;transform:translateX(-50%);
+    background:var(--gold);color:#0C1428;
+    font-size:10px;font-weight:700;letter-spacing:.8px;
+    text-transform:uppercase;
+    padding:3px 12px;border-radius:20px;
+    white-space:nowrap;
+  }
+  .pkg-name{
+    font-family:'Playfair Display',serif;
+    font-size:17px;font-weight:500;color:var(--text);
+    margin-bottom:4px;
+  }
+  .pkg-desc{font-size:13px;color:var(--muted);margin-bottom:12px}
+  .pkg-feature{
+    display:flex;align-items:flex-start;gap:8px;
+    margin-bottom:7px;font-size:12px;color:var(--soft);
+  }
+  .pkg-feature::before{content:'✓';color:var(--gold);font-weight:700;flex-shrink:0}
+  .pkg-price{
+    margin-top:14px;padding-top:12px;
+    border-top:1px solid #1E2E4A;
+    font-size:12px;color:var(--muted);
+  }
+  .lead-block{
+    background:var(--navy3);
+    border:1px solid rgba(200,168,75,.25);
+    border-radius:var(--radius);
+    padding:22px 18px;
+    text-align:center;
+  }
+  .lead-icon{font-size:36px;margin-bottom:10px;display:block}
+  .law-row{
+    display:flex;flex-wrap:wrap;gap:6px;margin-top:14px;
+  }
+  .law-badge{
+    background:rgba(200,168,75,.1);
+    border:1px solid rgba(200,168,75,.2);
+    color:var(--gold2);font-size:11px;font-weight:500;
+    padding:4px 10px;border-radius:4px;
+  }
+  .footer{
+    padding:28px 22px 48px;
+    text-align:center;
+    border-top:1px solid #1E2E4A;
+  }
+  .footer p{font-size:11px;color:var(--muted)}
+  .sep{
+    width:28px;height:1px;
+    background:rgba(200,168,75,.3);
+    margin:22px auto;
+  }
+  @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+  .hero>*{animation:fadeUp .5s ease both}
+  .hero .avatar{animation-delay:.05s}
+  .hero h1{animation-delay:.1s}
+  .hero .badge-row{animation-delay:.15s}
+  .hero p{animation-delay:.2s}
+  .hero .cta-stack{animation-delay:.25s}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="avatar">О</div>
+  <h1>Кадровый и воинский учёт<br><span class="gold">без штрафов</span></h1>
+  <div class="badge-row">
+    <span class="badge">20+ лет опыта</span>
+    <span class="badge">ТК РФ</span>
+    <span class="badge">ФЗ-53</span>
+    <span class="badge">ФЗ-152</span>
+  </div>
+  <p>Эксперт-практик. Аудит, постановка, сопровождение.<br>Работаю онлайн по всей России.</p>
+  <div class="cta-stack">
+    <a href="#lead" class="btn btn-primary">Получить бесплатный аудит →</a>
+    <a href="https://wa.me/" class="btn btn-wa">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.136.564 4.14 1.535 5.875L.057 23.943l6.281-1.646A11.956 11.956 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.91 0-3.7-.497-5.253-1.373l-.376-.224-3.898 1.022 1.037-3.786-.246-.389A9.957 9.957 0 0 1 2 12C2 6.478 6.478 2 12 2s10 4.478 10 10-4.478 10-10 10z"/></svg>
+      Написать в WhatsApp
+    </a>
+  </div>
+</div>
+
+<div class="section">
+  <div class="tag">Риски</div>
+  <h2>Проверки стали жёстче.<br>Цена ошибки выросла.</h2>
+  <div class="divider"></div>
+  <div class="pain-item">
+    <div class="pain-icon">⚠</div>
+    <div>
+      <h3>Штрафы до 500 000 ₽</h3>
+      <p>За нарушения воинского учёта — для руководителя и организации</p>
+    </div>
+  </div>
+  <div class="pain-item">
+    <div class="pain-icon">📋</div>
+    <div>
+      <h3>Военкомат без предупреждения</h3>
+      <p>Проверки приходят внезапно. Один неверный документ — и претензии ко всей системе</p>
+    </div>
+  </div>
+  <div class="pain-item">
+    <div class="pain-icon">⚖</div>
+    <div>
+      <h3>Ошибки в кадрах = уголовный риск</h3>
+      <p>Директор несёт личную ответственность за нарушения трудового и воинского законодательства</p>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="tag">Решение</div>
+  <h2>Я навожу порядок —<br>быстро и по закону</h2>
+  <div class="divider"></div>
+  <div class="solution-item">
+    <div class="check">✓</div>
+    <p>Аудит текущего состояния учёта — за 1–3 дня, с письменным заключением</p>
+  </div>
+  <div class="solution-item">
+    <div class="check">✓</div>
+    <p>Исправление нарушений до проверки — практически, без воды и теории</p>
+  </div>
+  <div class="solution-item">
+    <div class="check">✓</div>
+    <p>Постановка учёта с нуля или полное сопровождение под ваш бизнес</p>
+  </div>
+  <div class="solution-item">
+    <div class="check">✓</div>
+    <p>Адаптация штатного расписания под ОК 016-2025 — медицина, производство, госсектор</p>
+  </div>
+  <div class="cta-stack">
+    <a href="#lead" class="btn btn-outline">Записаться на разбор →</a>
+  </div>
+</div>
+
+<div class="section">
+  <div class="tag">Доверие</div>
+  <h2>20 лет. Сотни компаний.<br>Ни одного проваленного аудита.</h2>
+  <div class="divider"></div>
+  <div class="stats-grid">
+    <div class="stat-card">
+      <span class="stat-num">20+</span>
+      <span class="stat-label">лет экспертной практики</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-num">300+</span>
+      <span class="stat-label">компаний прошли аудит</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-num">0</span>
+      <span class="stat-label">проваленных проверок у клиентов</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-num">3</span>
+      <span class="stat-label">ключевых закона: ТК, ФЗ-53, ФЗ-152</span>
+    </div>
+  </div>
+  <div class="law-row">
+    <span class="law-badge">ТК РФ</span>
+    <span class="law-badge">ФЗ-53</span>
+    <span class="law-badge">ФЗ-152</span>
+    <span class="law-badge">ОК 016-2025</span>
+    <span class="law-badge">Медицина</span>
+    <span class="law-badge">Производство</span>
+    <span class="law-badge">Госсектор</span>
+  </div>
+</div>
+
+<div class="section">
+  <div class="tag">Кейсы</div>
+  <h2>Результаты клиентов</h2>
+  <div class="divider"></div>
+  <div class="case-card">
+    <div class="case-header">
+      <div class="case-icon">🏥</div>
+      <div>
+        <div class="case-title">Медицинская клиника</div>
+        <div class="case-sub">45 сотрудников · воинский учёт</div>
+      </div>
+    </div>
+    <p>Аудит выявил 12 нарушений в системе воинского учёта. Документы не соответствовали требованиям ФЗ-53 и военкомата.</p>
+    <div class="case-result">Устранили все нарушения за 5 дней — до визита военкомата. Проверка прошла без замечаний.</div>
+  </div>
+  <div class="case-card">
+    <div class="case-header">
+      <div class="case-icon">🏭</div>
+      <div>
+        <div class="case-title">Производственное предприятие</div>
+        <div class="case-sub">120 человек · постановка с нуля</div>
+      </div>
+    </div>
+    <p>Постановка кадрового и воинского учёта с нуля. Штатное расписание приведено в соответствие с ОК 016-2025.</p>
+    <div class="case-result">Полная готовность к любой проверке — за 2 недели. Комплект документов и регламентов.</div>
+  </div>
+  <div class="cta-stack">
+    <a href="#lead" class="btn btn-primary">Хочу такой же результат →</a>
+  </div>
+</div>
+
+<div class="section">
+  <div class="tag">Формат работы</div>
+  <h2>Как мы работаем</h2>
+  <div class="divider"></div>
+  <div class="step">
+    <div class="step-num">1</div>
+    <p><strong style="color:var(--text)">Заявка и диагностика</strong><br>Получаю заявку — выхожу на связь в течение 24 часов, определяю задачи</p>
+  </div>
+  <div class="step">
+    <div class="step-num">2</div>
+    <p><strong style="color:var(--text)">Аудит или постановка учёта</strong><br>Работаю чётко в оговорённые сроки, без затягивания и размытых результатов</p>
+  </div>
+  <div class="step">
+    <div class="step-num">3</div>
+    <p><strong style="color:var(--text)">Документы, инструкции, поддержка</strong><br>Передаю готовый пакет + остаюсь на связи после завершения работы</p>
+  </div>
+  <p style="font-size:13px;margin-top:10px;text-align:center">Работаю онлайн по всей России</p>
+</div>
+
+<div class="section">
+  <div class="tag">Услуги</div>
+  <h2>Выберите формат</h2>
+  <div class="divider"></div>
+
+  <div class="package-card">
+    <div class="pkg-name">Аудит</div>
+    <div class="pkg-desc">Быстрый вход. Минимальный риск.</div>
+    <div class="pkg-feature">Проверка кадрового или воинского учёта</div>
+    <div class="pkg-feature">Письменное заключение с выводами</div>
+    <div class="pkg-feature">Перечень нарушений и рекомендации</div>
+    <div class="pkg-feature">Срок: 1–3 рабочих дня</div>
+    <div class="pkg-price">Стоимость — по запросу · зависит от численности</div>
+  </div>
+
+  <div class="package-card featured">
+    <div class="featured-badge">Популярно</div>
+    <div class="pkg-name">Постановка учёта</div>
+    <div class="pkg-desc">Полная готовность к любой проверке.</div>
+    <div class="pkg-feature">Кадровый и/или воинский учёт с нуля</div>
+    <div class="pkg-feature">Полный комплект документов и шаблонов</div>
+    <div class="pkg-feature">Регламенты под ваш бизнес</div>
+    <div class="pkg-feature">Адаптация под ОК 016-2025</div>
+    <div class="pkg-price">Стоимость — по запросу · зависит от задач</div>
+  </div>
+
+  <div class="package-card">
+    <div class="pkg-name">Сопровождение</div>
+    <div class="pkg-desc">Спокойствие и контроль каждый месяц.</div>
+    <div class="pkg-feature">Ежемесячное ведение учёта</div>
+    <div class="pkg-feature">Ответы на запросы госорганов</div>
+    <div class="pkg-feature">Обновление при изменениях в законе</div>
+    <div class="pkg-feature">Консультации в течение месяца</div>
+    <div class="pkg-price">Стоимость — по запросу · абонентская плата</div>
+  </div>
+</div>
+
+<div class="section" id="lead">
+  <div class="tag">Бесплатно</div>
+  <h2>Получите чек-лист прямо сейчас</h2>
+  <div class="divider"></div>
+  <div class="lead-block">
+    <span class="lead-icon">📋</span>
+    <h3 style="font-family:'Manrope',sans-serif;font-size:15px;font-weight:600;margin-bottom:8px">15 обязательных документов воинского учёта</h3>
+    <p style="font-size:13px;margin-bottom:0">Проверьте себя за 10 минут. PDF — бесплатно, сразу в мессенджер.</p>
+  </div>
+  <div class="cta-stack">
+    <a href="https://wa.me/" class="btn btn-primary">Получить чек-лист →</a>
+    <a href="https://wa.me/" class="btn btn-wa">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.136.564 4.14 1.535 5.875L.057 23.943l6.281-1.646A11.956 11.956 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.91 0-3.7-.497-5.253-1.373l-.376-.224-3.898 1.022 1.037-3.786-.246-.389A9.957 9.957 0 0 1 2 12C2 6.478 6.478 2 12 2s10 4.478 10 10-4.478 10-10 10z"/></svg>
+      Написать в WhatsApp
+    </a>
+  </div>
+</div>
+
+<div class="section" style="text-align:center;padding-bottom:28px">
+  <div class="tag">Не ждите проверки</div>
+  <h2>Действуйте первыми</h2>
+  <div class="divider"></div>
+  <p style="font-size:14px;margin-bottom:0">Первичная консультация — бесплатно.<br>Узнайте, что не так в вашем учёте, раньше чем это обнаружит проверяющий.</p>
+  <div class="cta-stack">
+    <a href="https://wa.me/" class="btn btn-primary">Записаться на консультацию →</a>
+  </div>
+</div>
+
+<div class="footer">
+  <p>Эксперт по кадровому делопроизводству и воинскому учёту</p>
+  <div class="sep"></div>
+  <p>ТК РФ · ФЗ-53 · ФЗ-152 · ОК 016-2025</p>
+</div>
+
+</body>
+</html>
